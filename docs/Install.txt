@@ -1,0 +1,61 @@
+# Installation
+OS - Window10(64bit)
+Language - Python 3.7(64bit)
+Deep Learning - Spinning Up
+Simulation - Vega FEM(using pybind11, C++ converted to Python)
+Render - GLFW
+
+
+1. Deep Learning
+    1.1. Python 3.7
+        - https://www.python.org/ftp/python/3.7.9/python-3.7.9-amd64.exe
+        - Check Add Python 3.7 to PATH
+        
+    1.2. OpenMPI
+        - https://www.microsoft.com/en-us/download/details.aspx?id=100593
+        - Check msmpisetup.exe
+        
+    1.3. Spinning Up
+        1.3.1. Requires
+            - python -m pip install --upgrade pip
+            - pip install wheel
+            - pip install torch==1.3.1+cpu torchvision==0.4.1+cpu -f https://download.pytorch.org/whl/torch_stable.html
+            - http://prdownloads.sourceforge.net/swig/swigwin-4.0.2.zip
+                - Unzip and add a unzip path to the system path
+                 
+        1.3.2. Installing Spinning Up
+            - git clone https://github.com/openai/spinningup.git
+            - cd spinningup
+            - pip install -e .
+               
+    1.4. Check Your Install
+        1.4.1. Run
+            - python -m spinup.run ppo --hid "[32,32]" --env LunarLander-v2 --exp_name installtest --gamma 0.999
+               
+        1.4.2. Result
+            - python -m spinup.run plot data/installtest/installtest_s0
+            - python -m spinup.run test_policy data/installtest/installtest_s0
+
+
+2. Simulation
+    2.1. Requires
+        - pip install pybind11
+
+    2.2. Building Simulation
+        - git clone https://github.com/baju0218/SnakeLocomotion.git
+        - cd SnakeLocomotion
+        - build simulation.sln
+
+    2.3. Check Your Build
+        2.3.1. Run
+               - test_without_render.py
+
+
+3. Render
+    3.1. Requires
+        - pip install PyOpenGL
+        - pip install glfw
+
+    3.2. Check Your Install
+        3.2.1. Run
+            - test.py

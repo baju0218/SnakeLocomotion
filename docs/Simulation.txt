@@ -1,0 +1,47 @@
+# Simulation
+Test it with test_without_render.py
+
+
+1. Snake
+    1.1. Make
+        - Use data\snake.veg.exe
+
+    1.2. Simulation Value
+        - Set simulation values using loadSnake()
+        - Defalut Value
+            - filename : necessary
+            - timestep : 0.001
+            - dampingMassCoef : 0
+            - dampingStiffnessCoef : 0
+            - gravity : 0
+            - muscleStiffnessCoef : 0
+            - basePosition : np.array([0., 0., 0.])
+            - baseOrientation : np.array([0., 0., 0.])
+
+    1.3. Caution!
+        - You can't load a snake over one
+        - You must use loadSnake(), after loading all environments
+        - Otherwise, you may not be able to operate the collision and contact properly(If you only want to use visual shape, you can call it before loadsnake)
+        - You cannot use render without loadSnake()
+
+
+2. Environment
+    2.1. Use obj. file
+        - Save in data folder
+
+    2.2. Simulation Value
+        - Set simulation values using loadEnvironment()
+        - Defalut Value
+            - filename : necessary
+            - thickness : 0
+            - penetrationCoef : 0
+            - elasticityCoef : 0
+            - frictionResistanceCoef : 0
+            - frictionCoef : 0
+            - scale : 1
+            - basePosition : np.array([0., 0., 0.])
+            - baseOrientation : np.array([0., 0., 0.])
+
+    2.3. Map
+         - You can load multiple environments
+         - Make your own maps

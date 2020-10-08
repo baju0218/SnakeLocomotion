@@ -1,0 +1,34 @@
+# Render
+Test it with test.py
+
+
+1. Window
+    - Create a window using createWindow()
+        - Defalut Value
+            - witdh : 1080
+            - height : 1080
+            - title : "Snake Locomtion"
+    - Destroy the window using destroyWindow()
+
+
+2. Key
+    - Key R : Reset simulation
+    - Key P : Pause simulation
+    - Key V : View mode
+        - Mode 0 : Free view
+        - Mode 1 : Focus on snake
+        - Mode 2 : View from snake's eyes
+    - Key G : Draw global frame
+    - Key L : Draw local frame
+    - Key A : Draw goal
+    - Key 1 : Draw solid frame
+    - Key 2 : Draw wire frame
+    - Key 3 : Draw solid and wire frame
+    - Key B : Draw bounding box
+    - Key M : Draw muscle
+
+
+3. Mouse
+    - Left Button : Move eye
+    - Right Button : Move target
+    - Scroll : Move distance
