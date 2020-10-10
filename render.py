@@ -25,6 +25,18 @@ def destroyWindow():
     glfw.destroy_window(window)
     glfw.terminate()
 
+def isOpenWindow():
+    global window
+    
+    if window != None:
+        if not glfw.window_should_close(window):
+            return True
+        else:
+            destroyWindow()
+            return False
+    else:
+        return False
+    
 # Input Handler
 XPOS = 0
 YPOS = 0
@@ -32,9 +44,9 @@ BUTTON = 0
 
 VIEW = [0, None, None, None, None]
 DRAW = [True, True, False, False, False]
-SNAKE = [False, True]
+SNAKE = [True, True]
 ENVIRONMENT = [False, True]
-MUSCLE = False
+MUSCLE = True
 BOUNDINGBOX = False
 GOAL = True
 

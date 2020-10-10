@@ -19,6 +19,7 @@ Muscle::Muscle(TetMesh* tetMesh, double* mass, double muscleStiffnessCoef, Vec3d
 			muscleSegment.push_back({ index1,index2,index3,length1,length2 });
 		}
 	}
+
 	this->muscleLength = new double[8 * numCube];
 }
 

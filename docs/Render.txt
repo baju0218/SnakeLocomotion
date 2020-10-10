@@ -1,5 +1,4 @@
 # Render
-Test it with test.py
 
 
 1. Window
@@ -9,6 +8,7 @@ Test it with test.py
             - height : 1080
             - title : "Snake Locomtion"
     - Destroy the window using destroyWindow()
+    - Check that the window is open using isOpenWindow()
 
 
 2. Key
@@ -18,14 +18,24 @@ Test it with test.py
         - Mode 0 : Free view
         - Mode 1 : Focus on snake
         - Mode 2 : View from snake's eyes
-    - Key G : Draw global frame
-    - Key L : Draw local frame
-    - Key A : Draw goal
-    - Key 1 : Draw solid frame
-    - Key 2 : Draw wire frame
-    - Key 3 : Draw solid and wire frame
-    - Key B : Draw bounding box
+    - Key 1 : Draw global frame
+    - Key 2 : Draw grid
+    - Key 3 : Draw local frame
+    - Key 4 : Draw direction
+    - Key 5 : Draw velocity
+    - Key S : Draw snake
+        - Mode 0 : None
+        - Mode 1 : Wire frame
+        - Mode 2 : Solid frame
+        - Mode 2 : Wire and solid frame
+    - Key E : Draw environment
+        - Mode 0 : None
+        - Mode 1 : Wire frame
+        - Mode 2 : Solid frame
+        - Mode 2 : Wire and solid frame
     - Key M : Draw muscle
+    - Key B : Draw bounding box
+    - Key G : Draw goal
 
 
 3. Mouse

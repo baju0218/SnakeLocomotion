@@ -226,9 +226,10 @@ PYBIND11_MODULE(simulation, m) {
 	m.def("getCubePosition", &getCubePosition);
 	m.def("getCubeVelocity", &getCubeVelocity);
 	m.def("getNumMuscle", &getNumMuscle);
-	m.def("contractMuscle", &contractMuscle);
-
 	m.def("getMuscleLength", &getMuscleLength);
+	m.def("getInverseLocalFrame", &getInverseLocalFrame);
+
+	m.def("contractMuscle", &contractMuscle);
 	m.def("resetSimulation", &resetSimulation);
 	m.def("pauseSimulation", &pauseSimulation);
 	m.def("simulate", &simulate);

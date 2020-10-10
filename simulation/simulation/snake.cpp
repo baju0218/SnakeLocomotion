@@ -10,23 +10,22 @@ Snake::Snake(char* filename, double timestep, double dampingMassCoef, double dam
 	GenerateMassMatrix::computeMassMatrix(tetMesh, &massMatrix, true);
 	implicitBackwardEulerSparse = new ImplicitBackwardEulerSparse(3 * tetMesh->getNumVertices(), timestep, massMatrix, forceModel, 0, {}, dampingMassCoef, dampingStiffnessCoef);
 
-	int numVertex = tetMesh->getNumVertices();
-	mass = new double[numVertex];
-	deformation = new Vec3d[numVertex];
-	memset(deformation, 0, sizeof(Vec3d) * numVertex);
-	velocity = new Vec3d[numVertex];
-	memset(velocity, 0, sizeof(Vec3d) * numVertex);
-	force = new Vec3d[numVertex];
-	memset(force, 0, sizeof(Vec3d) * numVertex);
+	mass = new double[tetMesh->getNumVertices()];
+	deformation = new Vec3d[tetMesh->getNumVertices()];
+	memset(deformation, 0, sizeof(Vec3d) * tetMesh->getNumVertices());
+	velocity = new Vec3d[tetMesh->getNumVertices()];
+	memset(velocity, 0, sizeof(Vec3d) * tetMesh->getNumVertices());
+	force = new Vec3d[tetMesh->getNumVertices()];
+	memset(force, 0, sizeof(Vec3d) * tetMesh->getNumVertices());
 
-	gravityForce = new Vec3d[numVertex];
+	gravityForce = new Vec3d[tetMesh->getNumVertices()];
 	tetMesh->computeGravity(gravityForce->data(), gravity);
-	for (int i = 0; i < numVertex; i++)
+	for (int i = 0; i < tetMesh->getNumVertices(); i++)
 		mass[i] = -gravityForce[i][1] / gravity;
-	collisionForce = new Vec3d[numVertex];
-	memset(collisionForce, 0, sizeof(Vec3d) * numVertex);
-	muscleForce = new Vec3d[numVertex];
-	memset(muscleForce, 0, sizeof(Vec3d) * numVertex);
+	collisionForce = new Vec3d[tetMesh->getNumVertices()];
+	memset(collisionForce, 0, sizeof(Vec3d) * tetMesh->getNumVertices());
+	muscleForce = new Vec3d[tetMesh->getNumVertices()];
+	memset(muscleForce, 0, sizeof(Vec3d) * tetMesh->getNumVertices());
 
 	muscle = new Muscle(tetMesh, mass, muscleStiffnessCoef, muscleForce);
 	collision = new Collision(tetMesh, timestep, mass, velocity, force, collisionForce);

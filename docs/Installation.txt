@@ -37,25 +37,16 @@ Render - GLFW
             - python -m spinup.run test_policy data/installtest/installtest_s0
 
 
-2. Simulation
+2. Simulation & Render
     2.1. Requires
         - pip install pybind11
-
-    2.2. Building Simulation
-        - git clone https://github.com/baju0218/SnakeLocomotion.git
-        - cd SnakeLocomotion
-        - build simulation.sln
-
-    2.3. Check Your Build
-        2.3.1. Run
-               - test_without_render.py
-
-
-3. Render
-    3.1. Requires
         - pip install PyOpenGL
         - pip install glfw
 
-    3.2. Check Your Install
+    2.2. Building Simulation
+        - git clone https://github.com/baju0218/SnakeLocomotion.git
+        - build SnakeLocomotion/simulation/simulation.sln
+
+    2.3. Check Your Build
         3.2.1. Run
             - test.py

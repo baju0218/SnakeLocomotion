@@ -1,5 +1,4 @@
 # Simulation
-Test it with test_without_render.py
 
 
 1. Snake
@@ -21,7 +20,7 @@ Test it with test_without_render.py
     1.3. Caution!
         - You can't load a snake over one
         - You must use loadSnake(), after loading all environments
-        - Otherwise, you may not be able to operate the collision and contact properly(If you only want to use visual shape, you can call it before loadsnake)
+        - Otherwise, you may not be able to operate the collision and contact properly(If you only want to use visual shape, call it before loadsnake)
         - You cannot use render without loadSnake()
 
 
