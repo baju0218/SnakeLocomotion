@@ -44,11 +44,11 @@ BUTTON = 0
 
 VIEW = [0, None, None, None, None]
 DRAW = [True, True, False, False, False]
-SNAKE = [True, True]
+SNAKE = [False, True]
 ENVIRONMENT = [False, True]
-MUSCLE = True
+MUSCLE = False
 BOUNDINGBOX = False
-GOAL = True
+GOAL = False
 
 def keyCallback(window, key, scancode, action, mods):
     global AZIMUTH, ELEVATION, DISTANCE, TARGET, VIEW, DRAW, SNAKE, ENVIRONMENT, MUSCLE, BOUNDINGBOX, GOAL
