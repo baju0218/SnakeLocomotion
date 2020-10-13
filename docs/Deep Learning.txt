@@ -14,8 +14,3 @@
     1.3 Deep Learning
         1.4.1. Run
             - python -m spinup.run ppo --env SnakeLocomotion-v0 --exp_name snake --epochs 100
-               
-        1.4.2. Result
-            - python -m spinup.run plot data/snake/snake_s0
-            - python -m spinup.run test_policy data/snake/snake_s0
-               
