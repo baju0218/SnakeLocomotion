@@ -43,21 +43,23 @@ YPOS = 0
 BUTTON = 0
 
 VIEW = [0, None, None, None, None]
-DRAW = [True, True, False, False, False]
+DRAW = [True, True, False, False]
 SNAKE = [False, True]
 ENVIRONMENT = [False, True]
 MUSCLE = False
 BOUNDINGBOX = False
-GOAL = False
+GOAL = True
 
 def keyCallback(window, key, scancode, action, mods):
-    global AZIMUTH, ELEVATION, DISTANCE, TARGET, VIEW, DRAW, SNAKE, ENVIRONMENT, MUSCLE, BOUNDINGBOX, GOAL
+    global RENDER, AZIMUTH, ELEVATION, DISTANCE, TARGET, VIEW, DRAW, SNAKE, ENVIRONMENT, MUSCLE, BOUNDINGBOX, GOAL
 
     if action == glfw.PRESS:
         if key == glfw.KEY_R:
             sim.resetSimulation()
         elif key == glfw.KEY_P:
             sim.pauseSimulation()
+        elif key == glfw.KEY_X:
+            RENDER = not RENDER
         elif key == glfw.KEY_V:
             VIEW[0] = (VIEW[0] + 1) % 3
             if VIEW[0] == 0:
@@ -79,8 +81,6 @@ def keyCallback(window, key, scancode, action, mods):
             DRAW[2] = not DRAW[2]
         elif key == glfw.KEY_4:
             DRAW[3] = not DRAW[3]
-        elif key == glfw.KEY_5:
-            DRAW[4] = not DRAW[4]
         elif key == glfw.KEY_S:
             SNAKE[0] = not SNAKE[0]
             if SNAKE[0] == False:
@@ -129,22 +129,23 @@ def scrollCallback(window, xoffset, yoffset):
     EYE = TARGET + DISTANCE * np.array([np.cos(ELEVATION) * np.sin(AZIMUTH), np.sin(ELEVATION), np.cos(ELEVATION) * np.cos(AZIMUTH)])
 
 # Render
+RENDER = True
 FPS = 60.
 TIME = 0.
 
 AZIMUTH = np.pi / 4.
 ELEVATION = np.pi / 6.
-DISTANCE = np.pi
+DISTANCE = 2 * np.pi
 TARGET = np.array([0., 0., 0.])
 EYE = TARGET + DISTANCE * np.array([np.cos(ELEVATION) * np.sin(AZIMUTH), np.sin(ELEVATION), np.cos(ELEVATION) * np.cos(AZIMUTH)])
 UP = np.array([0., np.cos(ELEVATION), 0.])
 
 def render():
-    global window, FPS, TIME, AZIMUTH, ELEVATION, DISTANCE, TARGET, EYE, UP, VIEW, DRAW, SNAKE, ENVIRONMENT, MUSCLE, BOUNDINGBOX, GOAL
+    global window, RENDER, FPS, TIME, AZIMUTH, ELEVATION, DISTANCE, TARGET, EYE, UP, VIEW, DRAW, SNAKE, ENVIRONMENT, MUSCLE, BOUNDINGBOX, GOAL
 
     glfw.poll_events()
 
-    if (glfw.get_time() - TIME) < (1. / FPS):
+    if not RENDER or (glfw.get_time() - TIME) < (1. / FPS):
         return
     TIME = glfw.get_time()
 
@@ -172,15 +173,14 @@ def render():
     glLoadIdentity()
     gluLookAt(EYE[0], EYE[1], EYE[2], TARGET[0], TARGET[1], TARGET[2], UP[0], UP[1], UP[2])
 
-    sim.drawGoal(GOAL)
+    sim.drawGoal(GOAL, 0.25)
     sim.drawBoundingBox(BOUNDINGBOX)
     sim.drawMuscle(MUSCLE)
     sim.drawEnvironment(ENVIRONMENT[0], ENVIRONMENT[1])
     sim.drawSnake(SNAKE[0], SNAKE[1])
-    sim.drawVelocity(DRAW[4])
-    sim.drawDirection(DRAW[3])
-    sim.drawLocalFrame(DRAW[2])
-    sim.drawGrid(DRAW[1])
+    sim.drawDirection(DRAW[3], 0.5)
+    sim.drawLocalFrame(DRAW[2], 0.5)
+    sim.drawGrid(DRAW[0], DRAW[1], 10)
     sim.drawGlobalFrame(DRAW[0])
 
     glfw.swap_buffers(window)

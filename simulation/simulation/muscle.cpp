@@ -38,6 +38,8 @@ double* Muscle::getMuscleLength() {
 }
 
 void Muscle::contractMuscle(double* contractRate) {
+	memset(muscleForce, 0, sizeof(Vec3d) * tetMesh->getNumVertices());
+
 	for (int i = 0; i < muscleSegment.size(); i++) {
 		int index1 = muscleSegment[i].index1;
 		int index2 = muscleSegment[i].index2;

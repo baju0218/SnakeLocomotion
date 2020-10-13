@@ -44,3 +44,7 @@
     2.3. Map
          - You can load multiple environments
          - Make your own maps
+
+3. Goal
+    3.1. Set Goal
+        - Set goal position using setGoal()

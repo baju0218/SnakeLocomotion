@@ -22,17 +22,16 @@
     - Key 2 : Draw grid
     - Key 3 : Draw local frame
     - Key 4 : Draw direction
-    - Key 5 : Draw velocity
     - Key S : Draw snake
         - Mode 0 : None
         - Mode 1 : Wire frame
         - Mode 2 : Solid frame
-        - Mode 2 : Wire and solid frame
+        - Mode 3 : Wire and solid frame
     - Key E : Draw environment
         - Mode 0 : None
         - Mode 1 : Wire frame
         - Mode 2 : Solid frame
-        - Mode 2 : Wire and solid frame
+        - Mode 3 : Wire and solid frame
     - Key M : Draw muscle
     - Key B : Draw bounding box
     - Key G : Draw goal

@@ -72,22 +72,32 @@ void drawGlobalFrame(bool GLOBALFRAME) {
 		glEnd();
 	}
 }
-void drawGrid(bool GRID) {
+void drawGrid(bool GLOBALFRAME, bool GRID, int size) {
 	if (GRID) {
-		int size = 5;
-
 		glBegin(GL_LINES);
-		glColor3d(0.75, 0.75, 0.75);
+		glColor3d(0.5, 0.5, 0.5);
 		for (int i = -size;i <= size;i++) {
-			glVertex3d(i, 0, -size);
-			glVertex3d(i, 0, size);
-			glVertex3d(-size, 0, i);
-			glVertex3d(size, 0, i);
+			if (GLOBALFRAME && i == 0) {
+				glVertex3d(0., 0., -size);
+				glVertex3d(0., 0., 0.);
+				glVertex3d(0., 0., 1.);
+				glVertex3d(0., 0., size);
+				glVertex3d(-size, 0., 0.);
+				glVertex3d(0., 0., 0.);
+				glVertex3d(1., 0., 0.);
+				glVertex3d(size, 0., 0.);
+			}
+			else {
+				glVertex3d(i, 0., -size);
+				glVertex3d(i, 0., size);
+				glVertex3d(-size, 0., i);
+				glVertex3d(size, 0., i);
+			}
 		}
 		glEnd();
 	}
 }
-void drawLocalFrame(bool LOCALFRAME) {
+void drawLocalFrame(bool LOCALFRAME, double size) {
 	if (LOCALFRAME) {
 		Vec3d& center = snake->tetMesh->getVertex(7);
 		Vec3d& xAxis = snake->localFrame[0];
@@ -97,43 +107,27 @@ void drawLocalFrame(bool LOCALFRAME) {
 		glBegin(GL_LINES);
 		glColor3d(1., 0., 0.);
 		glVertex3d(center[0], center[1], center[2]);
-		glVertex3d(center[0] + xAxis[0], center[1] + xAxis[1], center[2] + xAxis[2]);
+		glVertex3d(center[0] + size * xAxis[0], center[1] + size * xAxis[1], center[2] + size * xAxis[2]);
 		glColor3d(0., 1., 0.);
 		glVertex3d(center[0], center[1], center[2]);
-		glVertex3d(center[0] + yAxis[0], center[1] + yAxis[1], center[2] + yAxis[2]);
+		glVertex3d(center[0] + size * yAxis[0], center[1] + size * yAxis[1], center[2] + size * yAxis[2]);
 		glColor3d(0., 0., 1.);
 		glVertex3d(center[0], center[1], center[2]);
-		glVertex3d(center[0] + zAxis[0], center[1] + zAxis[1], center[2] + zAxis[2]);
+		glVertex3d(center[0] + size * zAxis[0], center[1] + size * zAxis[1], center[2] + size * zAxis[2]);
 		glEnd();
 	}
 }
-void drawDirection(bool DIRECTION) {
+void drawDirection(bool DIRECTION, double size) {
 	if (DIRECTION) {
 		Vec3d& center = snake->tetMesh->getVertex(7);
-		Vec3d frontDirection = norm(snake->tetMesh->getVertex(2) - center);
-		Vec3d upDirection = norm(snake->tetMesh->getVertex(5) - center);
 		Vec3d goalDirection = norm(goal - center);
-
-		glBegin(GL_LINES);
-		glColor3d(1., 0., 0.);
-		glVertex3d(center[0], center[1], center[2]);
-		glVertex3d(center[0] + frontDirection[0], center[1] + frontDirection[1], center[2] + frontDirection[2]);
-		glColor3d(0., 1., 0.);
-		glVertex3d(center[0], center[1], center[2]);
-		glVertex3d(center[0] + upDirection[0], center[1] + upDirection[1], center[2] + upDirection[2]);
-		glColor3d(0., 0., 1.);
-		glVertex3d(center[0], center[1], center[2]);
-		glVertex3d(center[0] + goalDirection[0], center[1] + goalDirection[1], center[2] + goalDirection[2]);
-		glEnd();
-	}
-}
-void drawVelocity(bool VELOCITY) {
-	if (VELOCITY) {
-		Vec3d& center = snake->tetMesh->getVertex(7);
 		Vec3d& velocity = snake->velocity[7];
 
 		glBegin(GL_LINES);
-		glColor3d(0.5, 0.5, 0.5);
+		glColor3d(1., 1., 0.);
+		glVertex3d(center[0], center[1], center[2]);
+		glVertex3d(center[0] + size * goalDirection[0], center[1] + size * goalDirection[1], center[2] + size * goalDirection[2]);
+		glColor3d(1., 0.5, 0.);
 		glVertex3d(center[0], center[1], center[2]);
 		glVertex3d(center[0] + velocity[0], center[1] + velocity[1], center[2] + velocity[2]);
 		glEnd();
@@ -141,26 +135,26 @@ void drawVelocity(bool VELOCITY) {
 }
 void drawSnake(bool WIRE, bool SOLID) {
 	if (WIRE) {
-		glColor3d(0, 1, 0);
+		glColor3d(0., 1., 0.);
 		snake->renderVolumetricMesh->RenderWireframe(snake->tetMesh);
 	}
 	if (SOLID) {
 		glEnable(GL_POLYGON_OFFSET_FILL);
 		glPolygonOffset(2., 1.);
-		glColor3d(0.5, 1, 0.5);
+		glColor3d(0.5, 1., 0.5);
 		snake->renderVolumetricMesh->Render(snake->tetMesh);
 		glDisable(GL_POLYGON_OFFSET_FILL);
 	}
 }
 void drawEnvironment(bool WIRE, bool SOLID) {
 	if (WIRE) {
-		glColor3d(0, 0, 0);
+		glColor3d(0., 0., 0.);
 		for (int i = 0; i < environment.size(); i++)
 			environment[i]->objMeshRender->render(OBJMESHRENDER_EDGES, OBJMESHRENDER_NONE);
 	}
 	if (SOLID) {
-		float lightPos[4] = { 0,1,0,1 };
-		float lightColor[4] = { 1,1,1,1 };
+		float lightPos[4] = { 0.,100.,0.,1. };
+		float lightColor[4] = { 1.,1.,1.,1. };
 
 		glEnable(GL_LIGHTING);
 		glEnable(GL_LIGHT0);
@@ -176,7 +170,7 @@ void drawEnvironment(bool WIRE, bool SOLID) {
 void drawMuscle(bool MUSCLE) {
 	if (MUSCLE) {
 		glBegin(GL_LINES);
-		glColor3d(0, 0, 1);
+		glColor3d(0., 0.5, 1.);
 		for (int i = 0; i < snake->muscle->muscleSegment.size(); i++) {
 			Vec3d& vertex1 = snake->tetMesh->getVertex(snake->muscle->muscleSegment[i].index1);
 			Vec3d& vertex2 = snake->tetMesh->getVertex(snake->muscle->muscleSegment[i].index2);
@@ -192,16 +186,14 @@ void drawMuscle(bool MUSCLE) {
 }
 void drawBoundingBox(bool BOUNDINGBOX) {
 	if (BOUNDINGBOX) {
-		glColor3d(1, 0, 0);
+		glColor3d(1., 0., 0.);
 		snake->tetMesh->getBoundingBox().render();
 		for (int i = 0; i < environment.size(); i++)
 			environment[i]->boundingBox->render();
 	}
 }
-void drawGoal(bool GOAL) {
+void drawGoal(bool GOAL, double size) {
 	if (GOAL) {
-		double size = 0.2;
-
 		glColor3d(1., 1., 0.);
 		glBegin(GL_TRIANGLE_FAN);
 		glVertex3d(goal[0], goal[1], goal[2]);
@@ -238,7 +230,6 @@ PYBIND11_MODULE(simulation, m) {
 	m.def("drawGrid", &drawGrid);
 	m.def("drawLocalFrame", &drawLocalFrame);
 	m.def("drawDirection", &drawDirection);
-	m.def("drawVelocity", &drawVelocity);
 	m.def("drawSnake", &drawSnake);
 	m.def("drawEnvironment", &drawEnvironment);
 	m.def("drawMuscle", &drawMuscle);
