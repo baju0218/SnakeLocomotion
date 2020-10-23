@@ -75,14 +75,11 @@ void Collision::detectCollision() {
 					Vec3d Ftan = F - Fnor;
 
 					// Collision
-					if (nearestDistance < thickness[envIndex])
-						collisionForce[i] -= mass[i] * penetrationCoef[envIndex] * (nearestDistance - thickness[envIndex]) * N / (timestep * timestep);
+					collisionForce[i] -= mass[i] * penetrationCoef[envIndex] * (nearestDistance - thickness[envIndex]) * N / (timestep * timestep);
 					if (dot(N, V) < 0)
 						collisionForce[i] -= mass[i] * (1 + elasticityCoef[envIndex]) * Vnor / timestep;
 
-					// Contact
-					if (dot(N, V) < thickness[envIndex])
-						collisionForce[i] -= mass[i] * frictionResistanceCoef[envIndex] * Vtan;
+					collisionForce[i] -= mass[i] * frictionResistanceCoef[envIndex] * Vtan;
 					if (dot(N, F) < 0) {
 						if (len(Ftan) > frictionCoef[envIndex] * len(Fnor))
 							collisionForce[i] -= frictionCoef[envIndex] * len(Fnor) * norm(Ftan);

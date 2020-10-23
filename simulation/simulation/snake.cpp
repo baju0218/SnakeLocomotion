@@ -30,6 +30,12 @@ Snake::Snake(char* filename, double timestep, double dampingMassCoef, double dam
 	muscle = new Muscle(tetMesh, mass, muscleStiffnessCoef, muscleForce);
 	collision = new Collision(tetMesh, timestep, mass, velocity, force, collisionForce);
 
+	Vec3d xAxis = norm(tetMesh->getVertex(2) - tetMesh->getVertex(7));
+	Vec3d zAxis = norm(cross(xAxis, norm(tetMesh->getVertex(5) - tetMesh->getVertex(7))));
+	Vec3d yAxis = norm(cross(zAxis, xAxis));
+	localFrame = Mat3d(xAxis, yAxis, zAxis);
+	inverseLocalFrame = inv(trans(localFrame));
+
 	isSimulate = true;
 
 	renderVolumetricMesh = new RenderVolumetricMesh();
@@ -52,8 +58,8 @@ void Snake::resetSimulation() {
 
 	/* Local Frame */
 	Vec3d xAxis = norm(tetMesh->getVertex(2) - tetMesh->getVertex(7));
-	Vec3d zAxis = cross(xAxis, norm(tetMesh->getVertex(5) - tetMesh->getVertex(7)));
-	Vec3d yAxis = cross(zAxis, xAxis);
+	Vec3d zAxis = norm(cross(xAxis, norm(tetMesh->getVertex(5) - tetMesh->getVertex(7))));
+	Vec3d yAxis = norm(cross(zAxis, xAxis));
 	localFrame = Mat3d(xAxis, yAxis, zAxis);
 	inverseLocalFrame = inv(trans(localFrame));
 }
@@ -103,8 +109,8 @@ void Snake::simulate() {
 
 	/* Local Frame */
 	Vec3d xAxis = norm(tetMesh->getVertex(2) - tetMesh->getVertex(7));
-	Vec3d zAxis = cross(xAxis, norm(tetMesh->getVertex(5) - tetMesh->getVertex(7)));
-	Vec3d yAxis = cross(zAxis, xAxis);
+	Vec3d zAxis = norm(cross(xAxis, norm(tetMesh->getVertex(5) - tetMesh->getVertex(7))));
+	Vec3d yAxis = norm(cross(zAxis, xAxis));
 	localFrame = Mat3d(xAxis, yAxis, zAxis);
 	inverseLocalFrame = inv(trans(localFrame));
 }

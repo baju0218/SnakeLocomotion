@@ -14,6 +14,8 @@
 2. Key
     - Key R : Reset simulation
     - Key P : Pause simulation
+    - Key X : Enable/Disable render
+    - Key T : Real time simulation
     - Key V : View mode
         - Mode 0 : Free view
         - Mode 1 : Focus on snake

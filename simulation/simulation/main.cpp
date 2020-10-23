@@ -45,14 +45,11 @@ void setGoal(double x, double y, double z) { goal = { x,y,z }; }
 int getNumVertex() { return snake->tetMesh->getNumVertices(); }
 py::array_t<double> getVertexPosition() { return py::array_t<double>({ getNumVertex(), 3 }, { 3 * sizeof(double), sizeof(double) }, snake->tetMesh->getVertices()->data()); }
 py::array_t<double> getVertexVelocity() { return py::array_t<double>({ getNumVertex(), 3 }, { 3 * sizeof(double), sizeof(double) }, snake->velocity->data()); }
-int getNumCube() { return snake->tetMesh->getNumVertices() / 10; }
-py::array_t<double> getCubePosition() { return py::array_t<double>({ getNumCube(), 3 }, { 30 * sizeof(double), sizeof(double) }, snake->tetMesh->getVertex(7).data()); }
-py::array_t<double> getCubeVelocity() { return py::array_t<double>({ getNumCube(), 3 }, { 30 * sizeof(double), sizeof(double) }, snake->velocity[7].data()); }
-int getNumMuscle() { return snake->muscle->muscleSegment.size(); }
-py::array_t<double> getMuscleLength() { return py::array_t<double>({ getNumMuscle() }, { sizeof(double) }, snake->muscle->getMuscleLength()); }
+py::array_t<double> getLocalFrame() { return py::array_t<double>({ 3, 3 }, { 3 * sizeof(double), sizeof(double) }, snake->localFrame.data()); }
 py::array_t<double> getInverseLocalFrame() { return py::array_t<double>({ 3, 3 }, { 3 * sizeof(double), sizeof(double) }, snake->inverseLocalFrame.data()); }
-
+int getNumMuscle() { return snake->muscle->muscleSegment.size(); }
 void contractMuscle(py::array_t<double> contractRate) { snake->muscle->contractMuscle((double*)contractRate.request().ptr); }
+
 void resetSimulation() { snake->resetSimulation(); }
 void pauseSimulation() { snake->pauseSimulation(); }
 void simulate() { snake->simulate(); }
@@ -214,14 +211,11 @@ PYBIND11_MODULE(simulation, m) {
 	m.def("getNumVertex", &getNumVertex);
 	m.def("getVertexPosition", &getVertexPosition);
 	m.def("getVertexVelocity", &getVertexVelocity);
-	m.def("getNumCube", &getNumCube);
-	m.def("getCubePosition", &getCubePosition);
-	m.def("getCubeVelocity", &getCubeVelocity);
-	m.def("getNumMuscle", &getNumMuscle);
-	m.def("getMuscleLength", &getMuscleLength);
+	m.def("getLocalFrame", &getLocalFrame);
 	m.def("getInverseLocalFrame", &getInverseLocalFrame);
-
+	m.def("getNumMuscle", &getNumMuscle);
 	m.def("contractMuscle", &contractMuscle);
+
 	m.def("resetSimulation", &resetSimulation);
 	m.def("pauseSimulation", &pauseSimulation);
 	m.def("simulate", &simulate);

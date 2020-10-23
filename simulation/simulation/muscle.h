@@ -15,8 +15,6 @@ class Muscle {
 public:
 	Muscle(TetMesh* tetMesh, double* mass, double muscleStiffnessCoef, Vec3d* muscleForce);
 
-	double* getMuscleLength();
-
 	void contractMuscle(double* contractRate);
 
 	/* Attribute */

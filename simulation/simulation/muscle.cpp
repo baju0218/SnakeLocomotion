@@ -23,20 +23,6 @@ Muscle::Muscle(TetMesh* tetMesh, double* mass, double muscleStiffnessCoef, Vec3d
 	this->muscleLength = new double[8 * numCube];
 }
 
-double* Muscle::getMuscleLength() {
-	for (int i = 0; i < muscleSegment.size(); i++) {
-		int index1 = muscleSegment[i].index1;
-		int index2 = muscleSegment[i].index2;
-		int index3 = muscleSegment[i].index3;
-		double currentLength1 = len(tetMesh->getVertex(index1) - tetMesh->getVertex(index2));
-		double currentLength2 = len(tetMesh->getVertex(index2) - tetMesh->getVertex(index3));
-
-		muscleLength[i] = currentLength1 + currentLength2;
-	}
-
-	return muscleLength;
-}
-
 void Muscle::contractMuscle(double* contractRate) {
 	memset(muscleForce, 0, sizeof(Vec3d) * tetMesh->getNumVertices());
 

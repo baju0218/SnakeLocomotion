@@ -3,6 +3,10 @@ from OpenGL.GL import*
 from OpenGL.GLU import*
 import simulation as sim
 import numpy as np
+import time
+
+# Window
+window = None
 
 # Window
 window = None
@@ -51,13 +55,17 @@ BOUNDINGBOX = False
 GOAL = True
 
 def keyCallback(window, key, scancode, action, mods):
-    global RENDER, AZIMUTH, ELEVATION, DISTANCE, TARGET, VIEW, DRAW, SNAKE, ENVIRONMENT, MUSCLE, BOUNDINGBOX, GOAL
+    global RENDER, REAL, AZIMUTH, ELEVATION, DISTANCE, TARGET, VIEW, DRAW, SNAKE, ENVIRONMENT, MUSCLE, BOUNDINGBOX, GOAL
 
     if action == glfw.PRESS:
         if key == glfw.KEY_R:
             sim.resetSimulation()
         elif key == glfw.KEY_P:
             sim.pauseSimulation()
+        elif key == glfw.KEY_X:
+            RENDER = not RENDER
+        elif key == glfw.KEY_T:
+            REAL = not REAL
         elif key == glfw.KEY_X:
             RENDER = not RENDER
         elif key == glfw.KEY_V:
@@ -130,6 +138,7 @@ def scrollCallback(window, xoffset, yoffset):
 
 # Render
 RENDER = True
+REAL = False
 FPS = 60.
 TIME = 0.
 
@@ -141,11 +150,14 @@ EYE = TARGET + DISTANCE * np.array([np.cos(ELEVATION) * np.sin(AZIMUTH), np.sin(
 UP = np.array([0., np.cos(ELEVATION), 0.])
 
 def render():
-    global window, RENDER, FPS, TIME, AZIMUTH, ELEVATION, DISTANCE, TARGET, EYE, UP, VIEW, DRAW, SNAKE, ENVIRONMENT, MUSCLE, BOUNDINGBOX, GOAL
+    global window, RENDER, REAL, FPS, TIME, AZIMUTH, ELEVATION, DISTANCE, TARGET, EYE, UP, VIEW, DRAW, SNAKE, ENVIRONMENT, MUSCLE, BOUNDINGBOX, GOAL
 
     glfw.poll_events()
 
-    if not RENDER or (glfw.get_time() - TIME) < (1. / FPS):
+    deltaT = glfw.get_time() - TIME
+    if REAL and deltaT < (1. / FPS):
+        time.sleep(deltaT)
+    if not RENDER or deltaT < (1. / FPS):
         return
     TIME = glfw.get_time()
 
