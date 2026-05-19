@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{cc8ca648-dab4-4228-9350-fe770e207619}</ProjectGuid>
+    <RootNamespace>simulation</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <TargetExt>.pyd</TargetExt>
+    <OutDir>$(SolutionDir)\..</OutDir>
+    <IgnoreImportLibrary>true</IgnoreImportLibrary>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(LOCALAPPDATA)\Programs\Python\Python37\include;$(SolutionDir)\libraries\include;$(SolutionDir)\libraries\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(LOCALAPPDATA)\Programs\Python\Python37\libs;$(SolutionDir)\libraries\lib\Release;$(SolutionDir)\libraries\freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+    <PostBuildEvent>
+      <Command>del "$(SolutionDir)\..\$(ProjectName).exp"
+
+del "$(SolutionDir)\..\$(ProjectName).iobj"
+
+del "$(SolutionDir)\..\$(ProjectName).ipdb"
+
+del "$(SolutionDir)\..\$(ProjectName).lib"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\libraries\animationHelper\animationHelper.vcxproj">
+      <Project>{fc3db108-4f5e-4778-bc9b-45c60faacd53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\basicAlgorithms\basicAlgorithms.vcxproj">
+      <Project>{05e9808b-83d9-42dc-82d0-dbf724788ecf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\camera\camera.vcxproj">
+      <Project>{a3c67671-673b-4c5c-9d7d-779387eb4e78}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\clothBW\clothBW.vcxproj">
+      <Project>{38f8a4a9-60f3-4c36-b07e-051d3139f546}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\configFile\configFile.vcxproj">
+      <Project>{788554ba-3dcf-43bb-804b-e7c06719fd93}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\constrainedDOFs\constrainedDOFs.vcxproj">
+      <Project>{c345c942-3f8c-4552-b953-31b85c06f6cd}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\corotationalLinearFEM\corotationalLinearFEM.vcxproj">
+      <Project>{77ef3aed-ca4b-4dfb-93bb-558f677b2b14}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\distanceField\distanceField.vcxproj">
+      <Project>{a5d43704-8284-4d8c-8808-622d3c0f284c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\forceModel\forceModel.vcxproj">
+      <Project>{ac1aaa48-16f1-41b6-aefb-21cacb11057e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\getopts\getopts.vcxproj">
+      <Project>{6539503c-2f71-417c-9478-ef96235a2987}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\glslPhong\glslPhong.vcxproj">
+      <Project>{5fe64071-4fba-4bc5-9ce3-19723ecb4118}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\graph\graph.vcxproj">
+      <Project>{72cca7c0-6fdd-49ae-8ef8-a2585e232b41}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\hashTable\hashTable.vcxproj">
+      <Project>{5bdd3176-7492-4fac-a17d-99b87c2d3565}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\imageIO\imageIO.vcxproj">
+      <Project>{709ee0b2-bd2d-4c47-9f6a-339ef8f02ac2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\integratorSparse\integratorSparse.vcxproj">
+      <Project>{e4287bda-1b24-4dfa-a4ee-7b78d1cd4c61}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\integrator\integrator.vcxproj">
+      <Project>{af2d9a67-d8ea-44b0-bfde-a1d17a8ef8ba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\interpolationCoordinates\interpolationCoordinates.vcxproj">
+      <Project>{4d83a86c-79ff-4487-8631-808a2a373286}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\isotropicHyperelasticFEM\isotropicHyperelasticFEM.vcxproj">
+      <Project>{ddb74db4-bc9a-4daa-9842-cde3912836ff}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\lighting\lighting.vcxproj">
+      <Project>{efb2acfd-a615-4fbd-9b55-8b0f29f64960}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\listIO\listIO.vcxproj">
+      <Project>{19e191c9-fa41-4d2b-b20b-c2138bace099}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\massSpringSystem\massSpringSystem.vcxproj">
+      <Project>{8645b043-9650-4d1c-94e4-3641e4767f66}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\matrixIO\matrixIO.vcxproj">
+      <Project>{62c16a9f-9d91-4fc4-8028-0775ad0a9ab0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\mesher\mesher.vcxproj">
+      <Project>{df1515d5-1ad1-44c8-870f-99b67bd4ac78}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\mesh\mesh.vcxproj">
+      <Project>{83603987-0b95-4440-8371-649717dad6f6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\minivector\minivector.vcxproj">
+      <Project>{c458c3de-2732-4252-bdd9-615ac3f8727b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\objMesh\objMesh.vcxproj">
+      <Project>{c92e73e2-efc9-44bf-b747-c50cb4eec02a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\openGLHelper\openGLHelper.vcxproj">
+      <Project>{24e97226-b246-4ee1-b2f2-a9c42dbf2307}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\performanceCounter\performanceCounter.vcxproj">
+      <Project>{94c169f9-606c-435c-b163-612cae34cf24}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\polarDecomposition\polarDecomposition.vcxproj">
+      <Project>{11618ae1-00c2-4402-bd9c-bccd7e99a456}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\quaternion\quaternion.vcxproj">
+      <Project>{a9442d9d-83dc-4e4b-8eab-484ec2ea7269}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\renderVolumetricMesh\renderVolumetricMesh.vcxproj">
+      <Project>{4a099303-a03b-4f6b-8648-b2a7927ea2e0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\rigidBodyDynamics\rigidBodyDynamics.vcxproj">
+      <Project>{195234e6-b84c-4728-8852-a67b3a562827}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\sceneObject\sceneObject.vcxproj">
+      <Project>{3268754a-a6f3-442a-a5fb-e51952dbcfc6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\sparseMatrix\sparseMatrix.vcxproj">
+      <Project>{f11e5c6d-25c1-4acd-a470-8d5f9cbe7a14}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\sparseSolver\sparseSolver.vcxproj">
+      <Project>{ba72bd5e-45eb-4eec-9ca3-e7ca3c476105}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\stencilForceModel\stencilForceModel.vcxproj">
+      <Project>{faac50f8-5354-47aa-b556-dd1bfb994d1f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\stvk\stvk.vcxproj">
+      <Project>{7086002d-617f-416b-a1ab-844ca45db116}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\volumetricMesh\volumetricMesh.vcxproj">
+      <Project>{d725b94b-2015-4bd6-976d-e087887ecc22}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libraries\windingNumber\windingNumber.vcxproj">
+      <Project>{0d9c3221-ca71-4ae2-a0d3-00c09d7fb4a5}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="collision.cpp" />
+    <ClCompile Include="environment.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="muscle.cpp" />
+    <ClCompile Include="snake.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="collision.h" />
+    <ClInclude Include="environment.h" />
+    <ClInclude Include="muscle.h" />
+    <ClInclude Include="snake.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

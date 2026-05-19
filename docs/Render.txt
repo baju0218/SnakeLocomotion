@@ -1,0 +1,45 @@
+# Render
+
+
+1. Window
+    - Create a window using createWindow()
+        - Defalut Value
+            - witdh : 1080
+            - height : 1080
+            - title : "Snake Locomtion"
+    - Destroy the window using destroyWindow()
+    - Check that the window is open using isOpenWindow()
+
+
+2. Key
+    - Key R : Reset simulation
+    - Key P : Pause simulation
+    - Key X : Enable/Disable render
+    - Key T : Real time simulation
+    - Key V : View mode
+        - Mode 0 : Free view
+        - Mode 1 : Focus on snake
+        - Mode 2 : View from snake's eyes
+    - Key 1 : Draw global frame
+    - Key 2 : Draw grid
+    - Key 3 : Draw local frame
+    - Key 4 : Draw direction
+    - Key S : Draw snake
+        - Mode 0 : None
+        - Mode 1 : Wire frame
+        - Mode 2 : Solid frame
+        - Mode 3 : Wire and solid frame
+    - Key E : Draw environment
+        - Mode 0 : None
+        - Mode 1 : Wire frame
+        - Mode 2 : Solid frame
+        - Mode 3 : Wire and solid frame
+    - Key M : Draw muscle
+    - Key B : Draw bounding box
+    - Key G : Draw goal
+
+
+3. Mouse
+    - Left Button : Move eye
+    - Right Button : Move target
+    - Scroll : Move distance
